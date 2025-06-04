@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Dia dos Namorados</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #ff4d4d;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .painel {
+      background-color: white;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 20px;
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .painel h1 {
+      color: #d10000;
+      margin-bottom: 20px;
+    }
+
+    .painel h2 {
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    .painel img {
+      width: 200px;
+      height: auto;
+    }
+
+    .botao {
+      height: 40px;
+      width: 80px;
+      background-color: #d10000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 20px 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .botao:hover {
+      background-color: #a30000;
+    }
+
+    #nao {
+      position: absolute;
+    }
+
+    #mensagem-amor {
+      display: none;
+      background: url('isabela.jpg') center center no-repeat;
+      background-size: cover;
+      color: white;
+      padding: 40px 20px;
+      border-radius: 20px;
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    #mensagem-amor::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      z-index: 0;
+    }
+
+    #mensagem-amor h1,
+    #mensagem-amor p {
+      position: relative;
+      z-index: 1;
+    }
+
+    #mensagem-amor p {
+      font-size: 1.2em;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="painel" id="painel-inicial">
+    <h1>Feliz Dia dos Namorados</h1>
+    <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="Ursinho apaixonado" />
+    <h2>Vamos comprar um Chevette? 😍</h2>
+    <div>
+      <button class="botao" onclick="mostrarMensagem()">Sim!</button>
+      <button class="botao" id="nao" onmouseover="fuja()">Não!</button>
+    </div>
+  </div>
+
+  <div id="mensagem-amor">
+    <h1>Isabela, meu amor</h1>
+    <p>
+      Neste Dia dos Namorados, eu só quero te lembrar do quanto você é importante pra mim. ❤️<br><br>
+      Sua risada ilumina meus dias, seu carinho acalma minha alma, e seu amor me faz querer ser uma pessoa melhor todos os dias.<br><br>
+      Você é o meu motivo de sorrir, de sonhar, e de acreditar que o amor verdadeiro existe. <br><br>
+      Obrigado por ser quem você é. Te amo mais do que as palavras conseguem dizer. 💘
+    </p>
+  </div>
+
+  <script>
+    function fuja() {
+      const botaoNao = document.getElementById("nao");
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+      const maxX = larguraJanela - botaoNao.offsetWidth;
+      const maxY = alturaJanela - botaoNao.offsetHeight;
+      const aleatorioX = Math.floor(Math.random() * maxX);
+      const aleatorioY = Math.floor(Math.random() * maxY);
+      botaoNao.style.left = `${aleatorioX}px`;
+      botaoNao.style.top = `${aleatorioY}px`;
+    }
+
+    function mostrarMensagem() {
+      document.getElementById("painel-inicial").style.display = "none";
+      document.getElementById("mensagem-amor").style.display = "block";
+    }
+  </script>
+</body>
+</html>
