@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz Dia dos Namorados</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: url('https://i.pinimg.com/originals/65/d2/22/65d222a4b78bc8f95da4b8d4b989bb85.gif') repeat;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .painel, #mensagem-amor, #pagina-amor {
+      background-color: white;
+      border-radius: 20px;
+      text-align: center;
+      padding: 40px 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      margin: 20px 0;
+      position: relative;
+    }
+
+    .painel h1, #mensagem-amor h1, #pagina-amor h1 {
+      color: #d10000;
+      margin-bottom: 20px;
+    }
+
+    .painel h2 {
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    .painel img {
+      width: 200px;
+      height: auto;
+    }
+
+    .botao {
+      height: 40px;
+      width: 80px;
+      background-color: #d10000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 20px 10px;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+
+    .botao:hover {
+      background-color: #a30000;
+    }
+
+    #nao {
+      position: absolute;
+    }
+
+    #mensagem-amor {
+      background: none;
+      color: black;
+      overflow: hidden;
+    }
+
+    #mensagem-amor::before {
+      display: none;
+    }
+
+    input[type="range"], input[type="text"], input[type="date"] {
+      margin: 10px 0;
+      padding: 8px;
+      width: 80%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="painel" id="painel-inicial">
+      <h1>Feliz Dia dos Namorados</h1>
+      <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="Ursinho apaixonado" />
+      <h2>Eu e você vamos continuar solteiros! 😍</h2>
+      <div>
+        <button class="botao" onclick="irParaAmor()">Sim!</button>
+        <button class="botao" id="nao" onmouseover="fuja()">Não!</button>
+      </div>
+    </div>
+
+    <div id="pagina-amor" style="display:none;">
+      <h1>❤️ Questionário do Amor ❤️</h1>
+      <label for="sliderAmor">Quantos % você me ama?</label><br>
+      <input type="range" id="sliderAmor" min="0" max="100" value="50" oninput="mostrarValor()">
+      <p><strong id="valorAmor">50%</strong></p>
+      <p id="respostaAmor" style="margin-top: 10px;"></p>
+      <div id="corrigirAmor" style="display: none;">
+        <label>Agora sim, digite quanto realmente me ama:</label><br>
+        <input type="text" id="campo1000000" placeholder="Me fale quantos % me ama" />
+        <p id="mensagemCorrecao"></p>
+        <button class="botao" onclick="validarCorrecao()">Confirmar</button>
+      </div>
+      <div id="restoFormulario" style="display: none; flex-direction: column; align-items: center;">
+        <label for="nomeCompleto" style="margin-top: 10px;">Qual o nome do seu namorado?</label>
+        <input type="text" id="nomeCompleto" placeholder="Digite com carinho..." style="width: 80%; margin-bottom: 15px;" />
+
+        <label for="aniversario" style="margin-top: 10px; display: block;">Data do nosso aniversário de namoro:</label>
+        <input type="date" id="aniversario" name="aniversario" required style="width: 80%; margin-bottom: 10px;" />
+
+        <p id="erroNome" style="color: red; display: none; margin-bottom: 10px;"></p>
+
+        <button class="botao" onclick="validarFormulario()">Próximo</button>
+      </div>
+    </div>
+
+    <div id="mensagem-amor" style="display:none;">
+      <h1>Isabela, meu amor</h1>
+      <p>
+        Neste Dia dos Namorados, eu só quero te lembrar do quanto você é importante pra mim. ❤️<br><br>
+        Sua risada ilumina meus dias, seu carinho acalma minha alma, e seu amor me faz querer ser uma pessoa melhor todos os dias.<br><br>
+        Você é o meu motivo de sorrir, de sonhar, e de acreditar que o amor verdadeiro existe. <br><br>
+        Obrigado por ser quem você é. Te amo mais do que as palavras conseguem dizer. 💘
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function fuja() {
+      const botaoNao = document.getElementById("nao");
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
+      const maxX = larguraJanela - botaoNao.offsetWidth;
+      const maxY = alturaJanela - botaoNao.offsetHeight;
+      const aleatorioX = Math.floor(Math.random() * maxX);
+      const aleatorioY = Math.floor(Math.random() * maxY);
+      botaoNao.style.left = aleatorioX + "px";
+      botaoNao.style.top = aleatorioY + "px";
+    }
+
+    function irParaAmor() {
+      document.getElementById("painel-inicial").style.display = "none";
+      document.getElementById("pagina-amor").style.display = "block";
+    }
+
+    function mostrarValor() {
+      const slider = document.getElementById("sliderAmor");
+      const valor = slider.value;
+      document.getElementById("valorAmor").textContent = valor + "%";
+
+      if (valor == "100") {
+        document.getElementById("respostaAmor").textContent = "Só 100%? Vamos tentar de novo 😢";
+        document.getElementById("corrigirAmor").style.display = "block";
+      } else {
+        document.getElementById("respostaAmor").textContent = "";
+        document.getElementById("corrigirAmor").style.display = "none";
+        document.getElementById("restoFormulario").style.display = "none";
+      }
+    }
+
+    function validarCorrecao() {
+      const campo = document.getElementById("campo1000000").value.trim();
+      const msg = document.getElementById("mensagemCorrecao");
+
+      if (campo === "1000000%") {
+        msg.textContent = "Agora sim! 😍";
+        msg.style.color = "green";
+        document.getElementById("restoFormulario").style.display = "flex";
+      } else {
+        msg.textContent = "Hmm... Deixa de ser pão dura!";
+        msg.style.color = "red";
+        document.getElementById("restoFormulario").style.display = "none";
+      }
+    }
+
+    function validarFormulario() {
+      const nomeEsperado = "David Gabriel da Silva Costa";
+      const nomeDigitado = document.getElementById("nomeCompleto").value.trim();
+      const erroNome = document.getElementById("erroNome");
+
+      if (nomeDigitado !== nomeEsperado) {
+        erroNome.textContent = "Quer bancar de espertinha? Qual meu nome completo?";
+        erroNome.style.display = "block";
+        return; // bloqueia o avanço
+      } else {
+        erroNome.style.display = "none";
+        mostrarMensagem();
+      }
+    }
+
+    function mostrarMensagem() {
+      document.getElementById("pagina-amor").style.display = "none";
+      document.getElementById("mensagem-amor").style.display = "block";
+    }
+  </script>
+</body>
+</html>
